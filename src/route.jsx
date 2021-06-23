@@ -1,8 +1,9 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import About from "./views/About";
-import Detail from "./views/detail";
+
 import Nav from "./Nav";
 import Home from "./views/Home"
+import ProductListing from "./views/ProductListing";
+
 export default function Rote(){
 
     return(
@@ -11,8 +12,8 @@ export default function Rote(){
             <Switch>
 
                 <Route path="/" component={Home} exact></Route>
-                <Route path="/about" component={About} exact></Route>
-                <Route path="/about/:id" component={Detail}></Route>
+                <Route path="/products-list" component={ProductListing} exact></Route>
+                <Route>404 sayfa bulunamadı </Route>
             </Switch>
         </Router>
     )
