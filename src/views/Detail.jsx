@@ -1,28 +1,47 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Link, useParams} from "react-router-dom";
+import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {removeProduct, selectedProduct} from "../redux/actions/ProductAction";
 
-export default function Detail({match}){
-    const [item, setItems] = useState({})
+export default function Detail(){
+    const {id} = useParams();
+    const  dispatch= useDispatch();
+    const product= useSelector(state => state.allProducts.product)
     useEffect(()=> {
-        fetcItem(match.params.id);
+        if(id && id !== "") fetchItem();
+        return () => {
+            dispatch(removeProduct())
+        }
 
-    })
-    const fetcItem= async (id) => {
+    }, [id])
+    const fetchItem= async () => {
 
+        const response= await  axios
+            .get("https://fakestoreapi.com/products/"+id)
+            .catch((err) => {
+                console.log(err)
+            })
 
-
-  const data= await  fetch("https://fakestoreapi.com/products/"+id)
-       let item1= await data.json();
-
-        setItems(item1)
+    dispatch(selectedProduct(response.data))
+console.log(product)
 }
+
 
     return (
         <div>
+            {Object.keys(product).length=== 0 ?
+                (
+                    <div> Yükleniyor </div>
+                ) : (
+                    <div >
             <h1>Ürün Detayı</h1>
-            <img src={item.image}/>
+            <img src={product.image}/>
             <Link to="/about">Listeyi DÖn</Link>
-            <h1>{item.title}</h1>
+            <h1>{product.title}</h1>
+                    </div>
+                )
+            }
         </div>
 
     )

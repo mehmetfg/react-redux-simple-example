@@ -10,7 +10,11 @@ export const selectedProduct = (product) => {
     return {
         type:ActionTypes.SELECTED_PRODUCTS,
         payload:product,
-
     }
 
+}
+export const removeProduct = () => {
+    return {
+        type: ActionTypes.REMOVE_SELECTED_PRODUCT,
+    }
 }
