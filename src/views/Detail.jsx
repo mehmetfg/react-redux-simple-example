@@ -13,16 +13,13 @@ export default function Detail(){
         return () => {
             dispatch(removeProduct())
         }
-
     }, [id])
     const fetchItem= async () => {
-
         const response= await  axios
             .get("https://fakestoreapi.com/products/"+id)
             .catch((err) => {
                 console.log(err)
             })
-
     dispatch(selectedProduct(response.data))
 console.log(product)
 }
