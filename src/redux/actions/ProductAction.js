@@ -1,11 +1,10 @@
 import {AType} from "../contants/action-types";
-import {client} from "./index";
 import axios from "axios";
+import ProductService from "../services/ProductService"
 
-const url='/products'
 export const setProducts = () => async (dispatch) => {
     try {
-        const res = await client.get(url);
+        const res = await ProductService.getAll();
         dispatch({
             type: AType.SET_PRODUCTS,
             payload: res.data,

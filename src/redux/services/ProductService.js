@@ -1,4 +1,4 @@
-import {client} from "../actions";
+import {client} from "./index";
 
 const getAll = () => {
     return client.get("/products");
